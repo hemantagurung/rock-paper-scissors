@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissors</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #4a90e2;
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #4caf50;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      .result.tie {
+        background-color: #f39c12;
+      }
+
+      .result.loser {
+        background-color: #e74c3c;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock, Paper, Scissors</h1>
+    <div id="game-result"></div>
+    <button onclick="playAgain()">Play Again</button>
+
+    <script>
+      let p1 = prompt(
+        "Player 1: Rock, Paper, or Scissors? (r/p/s)"
+      ).toLowerCase();
+      let p2 = prompt(
+        "Player 2: Rock, Paper, or Scissors? (r/p/s)"
+      ).toLowerCase();
+
+      function determineWinner(p1, p2) {
+        if (p1 === p2) {
+          return { message: "It's a Tie!", className: "tie" };
+        } else if (
+          (p1 === "r" && p2 === "s") ||
+          (p1 === "s" && p2 === "p") ||
+          (p1 === "p" && p2 === "r")
+        ) {
+          return { message: "Player 1 Wins!", className: "winner" };
+        } else {
+          return { message: "Player 2 Wins!", className: "loser" };
+        }
+      }
+
+      function displayResult(result) {
+        const resultDiv = document.getElementById("game-result");
+        resultDiv.textContent = result.message;
+        resultDiv.className = `result ${result.className}`;
+      }
+
+      const result = determineWinner(p1, p2);
+      displayResult(result);
+
+      function playAgain() {
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>
